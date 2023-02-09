@@ -10,6 +10,7 @@ import { PageLoader } from 'widgets/PageLoader';
 
 export default () => {
     const { theme } = useTheme();
+
     return (
         <div className={classNames('app', {}, [theme])}>
             <Suspense fallback={<PageLoader />}>
