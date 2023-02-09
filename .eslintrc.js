@@ -22,7 +22,6 @@ module.exports = {
         'react', '@typescript-eslint', 'i18next',
     ],
     rules: {
-
         'react/function-component-definition': 'off',
         'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.tsx'] }],
         'import/no-unresolved': 'off',
