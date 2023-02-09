@@ -11,7 +11,14 @@ const LangSwitcher = () => {
     };
 
     return (
-        <Button className={cls.LangSwitcher} theme={ThemeButton.CLEAR} onClick={toggle}>{t('переключить')}</Button>
+        <Button
+            className={cls.LangSwitcher}
+            theme={ThemeButton.CLEAR}
+            onClick={toggle}
+        >
+            {t('переключить')}
+
+        </Button>
     );
 };
 
