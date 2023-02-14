@@ -1,5 +1,3 @@
-import './styles/index.scss';
-
 import classNames from 'shared/lib/classNames/classNames';
 import { useTheme } from 'app/provider/ThemeProvider';
 import { AppRouter } from 'app/provider/router';
@@ -15,6 +13,7 @@ export default () => {
         <div className={classNames('app', {}, [theme])}>
             <Suspense fallback={<PageLoader />}>
                 <Navbar />
+
                 <div className="content-page">
                     <Sidebar />
                     <AppRouter />

@@ -19,7 +19,7 @@ module.exports = {
         sourceType: 'module',
     },
     plugins: [
-        'react', '@typescript-eslint', 'i18next',
+        'react', '@typescript-eslint', 'i18next', 'react-hooks',
     ],
     rules: {
         'react/function-component-definition': 'off',
@@ -42,15 +42,20 @@ module.exports = {
         ['error', { markupOnly: true, ignoreAttribute: ['data-testid', 'to'] }],
         'max-len': ['error', { code: 100, ignoreComments: true }],
         'linebreak-style': 0,
+        'jsx-a11y/no-static-element-interactions': 'off', // убрать в конце
+        'jsx-a11y/click-events-have-key-events': 'off', // убрать в конце
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'error',
     },
     globals: {
         __IS__DEV: true,
     },
     overrides: [
         {
-            files: ['**/src/**/*.test.{ts,tsx}'],
+            files: ['**/src/**/*.{test,stories}.{ts,tsx}'],
             rules: {
                 'i18next/no-literal-string': 'off',
+                'max-len': 'off',
             },
         },
     ],
