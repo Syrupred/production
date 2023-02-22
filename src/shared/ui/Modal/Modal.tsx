@@ -18,14 +18,12 @@ const ANIMATION_DELAY = 300;
 const Modal = ({
     className, children, isOpen, onClose,
 }: ModalProps) => {
-    const { theme } = useTheme();
     const [isClosing, setIsClosing] = useState(false);
     const timerRef = useRef<ReturnType<typeof setTimeout>>();
 
     const mods: Record<string, boolean> = {
         [cls.opened]: isOpen,
         [cls.closed]: isClosing,
-        [cls[theme]]: true,
     };
 
     const closeHandler = useCallback(() => {
