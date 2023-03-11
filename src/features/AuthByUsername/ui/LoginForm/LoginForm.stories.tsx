@@ -35,5 +35,5 @@ Loading.args = {
 
 };
 Loading.decorators = [StoreDecorator({
-    login: { isLoading: true },
+    login: { isLoading: true, username: 'admin', password: '123' },
 })];
