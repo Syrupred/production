@@ -21,20 +21,23 @@ className?: string;
 theme?: ThemeButton;
 square?: boolean;
 size?: SizeButton;
+disabled?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
     const {
-        children, className, theme, square, size = SizeButton.M, ...otherProps
+        children, className, theme, square, size = SizeButton.M, disabled, ...otherProps
     } = props;
 
     const mods: Record<string, boolean> = {
         [cls.square]: square,
+        [cls.disabled]: disabled,
     };
 
     return (
         <button
             type="button"
+            disabled={disabled}
             {...otherProps}
             className={classNames(cls.Button, mods, [className, cls[theme], cls[size]])}
         >

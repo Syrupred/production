@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface CounterState {
-  value: number;
+  value?: number;
 }
 
 const initialState: CounterState = {
