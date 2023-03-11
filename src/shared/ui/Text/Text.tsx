@@ -2,8 +2,8 @@ import classNames from 'shared/lib/classNames/classNames';
 import cls from './Text.module.scss';
 
 export enum TextTheme {
-PRIMARY= 'primary',
-ERROR= 'error'
+PRIMARY = 'primary',
+ERROR = 'error',
 }
 
 interface TextProps {
@@ -15,11 +15,14 @@ theme?: TextTheme;
 
 const Text = ({
     className, title, text, theme = TextTheme.PRIMARY,
-}: TextProps) => (
-    <div className={classNames(cls.Text, { }, [className, theme])}>
-        {title && <p className={cls.title}>{title}</p>}
-        {text && <p className={cls.text}>{text}</p>}
-    </div>
-);
+}: TextProps) => {
+    console.log(theme);
+    return (
+        <div className={classNames(cls.Text, { [theme]: true }, [className])}>
+            {title && <p className={cls.title}>{title}</p>}
+            {text && <p className={cls.text}>{text}</p>}
+        </div>
+    );
+};
 
 export default Text;
