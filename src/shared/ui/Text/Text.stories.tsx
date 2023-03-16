@@ -3,7 +3,7 @@ import { Theme } from 'app/provider/ThemeProvider';
 import React from 'react';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 
-import Text, { TextTheme } from './Text';
+import { Text, TextTheme } from './Text';
 
 export default {
     title: 'shared/Text',
