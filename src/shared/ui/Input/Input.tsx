@@ -45,4 +45,4 @@ const Input = memo(({
     );
 });
 
-export default Input;
+export default memo(Input);

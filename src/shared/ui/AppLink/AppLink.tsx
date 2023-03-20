@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import classNames from 'shared/lib/classNames/classNames';
 import cls from './AppLink.module.scss';
@@ -28,4 +29,4 @@ const AppLink = (props: AppLinkProps) => {
     );
 };
 
-export default AppLink;
+export default memo(AppLink);

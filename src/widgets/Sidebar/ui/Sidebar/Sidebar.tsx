@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+
 import classNames from 'shared/lib/classNames/classNames';
-import AppLink, { AppLinkTheme } from 'shared/ui/AppLink/AppLink';
+
 import Button, { SizeButton, ThemeButton } from 'shared/ui/Button/Button';
 import LangSwitcher from 'widgets/LangSwitcher/LangSwitcher';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
-import MainIcon from 'shared/assets/icons/home.svg';
-import AboutIcon from 'shared/assets/icons/aboutpage.svg';
+
+import { SidebarItemList } from 'widgets/Sidebar/model/items';
 import cls from './Sidebar.module.scss';
+import SidebarItem from './SidebarItem/SidebarItem';
 
 interface SidebarProps {
 className?: string;
@@ -39,30 +40,9 @@ const Sidebar = (props: SidebarProps) => {
                 {collapsed ? '>' : '<'}
             </Button>
             <div className={cls.items}>
-                <div className={cls.item}>
-
-                    <AppLink
-                        to={RoutePath.main}
-                        theme={AppLinkTheme.SECONDARY}
-                    >
-                        <MainIcon className={cls.icon} />
-                        <span className={classNames(cls.link)}>{t('Главная страница')}</span>
-
-                    </AppLink>
-                </div>
-
-                <div className={cls.item}>
-
-                    <AppLink
-                        to={RoutePath.about}
-                        theme={AppLinkTheme.SECONDARY}
-
-                    >
-                        <AboutIcon className={cls.icon} />
-                        <span className={classNames(cls.link)}>{t('O сайте')}</span>
-                    </AppLink>
-                </div>
-
+                {SidebarItemList.map((item) => (
+                    <SidebarItem item={item} collapsed={collapsed} key={item.path} />
+                ))}
             </div>
             <div className={cls.switchers}>
                 <ThemeSwitcher />
@@ -72,4 +52,4 @@ const Sidebar = (props: SidebarProps) => {
     );
 };
 
-export default Sidebar;
+export default memo(Sidebar);

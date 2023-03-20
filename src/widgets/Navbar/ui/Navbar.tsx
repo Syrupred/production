@@ -1,10 +1,11 @@
 /* eslint-disable i18next/no-literal-string */
 import { getAuthUserData, userActions } from 'entities/User';
 import { LoginModal } from 'features/AuthByUsername';
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import classNames from 'shared/lib/classNames/classNames';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 
 import Button, { ThemeButton } from 'shared/ui/Button/Button';
 
@@ -14,10 +15,10 @@ interface NavbarProps {
     className?: string;
 }
 
-export const Navbar = ({ className }: NavbarProps) => {
+export const Navbar = memo(({ className }: NavbarProps) => {
     const { t } = useTranslation();
     const [isAuthModal, setIsAuthModal] = useState(false);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const authData = useSelector(getAuthUserData);
 
     const onToggleModal = useCallback(() => {
@@ -57,4 +58,4 @@ export const Navbar = ({ className }: NavbarProps) => {
             {isAuthModal && <LoginModal isOpen={isAuthModal} onClose={onToggleModal} />}
         </div>
     );
-};
+});

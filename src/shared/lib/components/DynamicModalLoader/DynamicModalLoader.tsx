@@ -5,7 +5,8 @@ import { loginReducer } from 'features/AuthByUsername';
 import {
     FC, useEffect,
 } from 'react';
-import { useDispatch, useStore } from 'react-redux';
+import { useStore } from 'react-redux';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 
 export type ReducersList = {
     [name in StateSchemaKey]?: Reducer;
@@ -22,7 +23,7 @@ const DynamicModalLoader: FC<DynamicModalLoaderProps> = ({
     children, reducers, removeAfterUnmount,
 }) => {
     const store = useStore() as ReduxStoreWithManager;
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     useEffect(() => {
         Object.entries(reducers).forEach(([name, reducer]: ReducersListEntries) => {
             store.reducerManager.add(name, reducer);
