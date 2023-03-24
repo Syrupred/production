@@ -1,5 +1,4 @@
 import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
-import { getDefaultNormalizer } from '@testing-library/react';
 import { counterReducer } from 'entities/Counter';
 import { userReducer } from 'entities/User';
 import { NavigateOptions, To } from 'react-router-dom';
@@ -7,7 +6,7 @@ import { $api } from 'shared/api/api';
 
 import { createReducerManager } from './reducerManager';
 
-import { StateSchema } from './StateSchema';
+import { ExtraThunkApi, StateSchema } from './StateSchema';
 
 export const createReduxStore = (
     initialState?: StateSchema,
@@ -22,16 +21,18 @@ export const createReduxStore = (
 
     const reducerManager = createReducerManager(rootReducers);
 
+    const extraArg: ExtraThunkApi = {
+        api: $api,
+        navigate,
+    };
+
     const store = configureStore({
-        reducer: reducerManager.reduce,
+        reducer: reducerManager.reduce as unknown as ReducersMapObject<StateSchema>,
         devTools: __IS__DEV,
         preloadedState: initialState,
         middleware: (getDefaultMiddleware) => getDefaultMiddleware({
             thunk: {
-                extraArgument: {
-                    api: $api,
-                    navigate,
-                },
+                extraArgument: extraArg,
             },
         }),
     });

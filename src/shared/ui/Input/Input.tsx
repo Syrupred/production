@@ -9,7 +9,7 @@ type HTMLInputpProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'on
 interface InputProps extends HTMLInputpProps {
 className?: string;
 value?: string;
-type: string;
+type?: string;
 autofocus?: boolean;
 placeholder: string;
 

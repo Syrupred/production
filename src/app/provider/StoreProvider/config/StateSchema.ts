@@ -9,8 +9,8 @@ import { LoginSchema } from 'features/AuthByUsername';
 import { NavigateOptions, To } from 'react-router-dom';
 
 export interface StateSchema {
-    counter?: CounterState;
-    user?: UserSchema;
+    counter: CounterState;
+    user: UserSchema;
 
     // async
     login?: LoginSchema;
@@ -31,7 +31,7 @@ export interface ReduxStoreWithManager extends EnhancedStore<StateSchema>{
 
 export interface ExtraThunkApi {
     api: AxiosInstance,
-    navigate: (to: To, options?: NavigateOptions) => void
+    navigate?: (to: To, options?: NavigateOptions) => void
 }
 
 export interface ThunkConfig<T> {
