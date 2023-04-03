@@ -1,4 +1,3 @@
-import React from 'React';
 import MainIcon from 'shared/assets/icons/home.svg';
 import AboutIcon from 'shared/assets/icons/aboutpage.svg';
 import ProfileIcon from 'shared/assets/icons/profilepage.svg';
