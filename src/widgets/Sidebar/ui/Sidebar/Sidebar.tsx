@@ -41,7 +41,12 @@ const Sidebar = (props: SidebarProps) => {
             </Button>
             <div className={cls.items}>
                 {SidebarItemList.map((item) => (
-                    <SidebarItem item={item} collapsed={collapsed} key={item.path} />
+                    <SidebarItem
+                        item={item}
+                        collapsed={collapsed}
+                        key={item.path}
+
+                    />
                 ))}
             </div>
             <div className={cls.switchers}>
