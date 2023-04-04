@@ -12,6 +12,7 @@ export interface BuildOptions {
     path: BuildPath;
     isDev: boolean;
     port: number;
+    project: 'storybook' | 'frontend' | 'jest';
 }
 
 export interface BuildEnv {

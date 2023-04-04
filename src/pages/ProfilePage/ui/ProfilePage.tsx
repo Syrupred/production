@@ -11,6 +11,8 @@ import DynamicModalLoader,
 { ReducersList } from 'shared/lib/components/DynamicModalLoader/DynamicModalLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { Currency } from 'entities/Currency/model/types/currency';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
+import { ValidateProfileError } from 'entities/Profile/model/types/profile';
 import cls from './ProfilePage.module.scss';
 import ProfilePageHeader from './ProfilePageHeader/ProfilePageHeader';
 
@@ -23,10 +25,17 @@ className?: string;
 }
 
 const ProfilePage = ({ className }: ProfilePageProps) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('profile');
     const dispatch = useAppDispatch();
     const profile = useSelector(getProfileState);
 
+    const validateErrorsTranslate = {
+        [ValidateProfileError.INCORRRECT_AGE]: t('некорректный возраст'),
+        [ValidateProfileError.INCORRRECT_COUNTRY]: t('некорректная страна'),
+        [ValidateProfileError.INCORRRECT_USER_DATA]: t('имя и фамилия обязательны'),
+        [ValidateProfileError.NO_DATA]: t('данные не указаны'),
+        [ValidateProfileError.SERVER_ERROR]: t('ошибка при сохранении изменений'),
+    };
     const onChangeFirstName = useCallback((value: string) => {
         dispatch(profileActions.updateProfile({ first: value }));
     }, [dispatch]);
@@ -60,13 +69,22 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(fetchProfileData());
+        if (__PROJECT !== 'storybook') {
+            dispatch(fetchProfileData());
+        }
     }, [dispatch]);
 
     return (
         <DynamicModalLoader reducers={reducers} removeAfterUnmount>
             <div className={classNames(cls.ProfilePage, { }, [className])}>
                 <ProfilePageHeader />
+                {profile.validateErrors?.length && profile.validateErrors?.map((error) => (
+                    <Text
+                        theme={TextTheme.ERROR}
+                        text={validateErrorsTranslate[error]}
+                        key={error}
+                    />
+                ))}
                 <ProfileCard
                     data={profile}
                     onChangeFirstName={onChangeFirstName}
