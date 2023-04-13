@@ -21,6 +21,7 @@ import Icon from 'shared/ui/Icon/Icon';
 import {
     ArticleBlocks, ArticleBlockType, ArticleCodeBlock, ArticleImageBlock, ArticleTextBlock,
 } from 'entities/Article/model/types/article';
+import UseInitialEffect from 'shared/lib/hooks/useInitialEffect';
 import cls from './ArticleDetails.module.scss';
 import ArticleCodeBlockComponent from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
 import ArticleImageBlockComponent from '../ArticleImageBlockComponent/ArticleImageBlockComponent';
@@ -112,11 +113,7 @@ const ArticleDetails = ({ className, id }: ArticleDetailsProps) => {
         );
     }
 
-    useEffect(() => {
-        if (__PROJECT !== 'storybook') {
-            dispach(fetchArticleById(id));
-        }
-    }, [dispach, id]);
+    UseInitialEffect(() => dispach(fetchArticleById(id)));
 
     return (
         <DynamicModalLoader removeAfterUnmount reducers={reducers}>
