@@ -8,9 +8,12 @@ import { PageLoader } from 'widgets/PageLoader';
 
 import { userActions } from 'entities/User';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import { useSelector } from 'react-redux';
+import { getUserInited } from 'entities/User/model/selectors/getAuthUserData';
 
 export default () => {
     const dispatch = useAppDispatch();
+    const inited = useSelector(getUserInited);
 
     useEffect(() => {
         dispatch(userActions.initAuthData());
@@ -23,7 +26,7 @@ export default () => {
 
                 <div className="content-page">
                     <Sidebar />
-                    <AppRouter />
+                    {inited && <AppRouter />}
                 </div>
             </Suspense>
         </div>
