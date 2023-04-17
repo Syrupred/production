@@ -10,6 +10,7 @@ export const initialState: ProfileSchema = {
     data: undefined,
     isLoading: false,
     error: undefined,
+    id: undefined,
 };
 
 export const profileSlice = createSlice({

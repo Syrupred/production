@@ -2,14 +2,15 @@ import { Country } from 'entities/Country/model/types/country';
 import { Currency } from 'entities/Currency/model/types/currency';
 
 export interface Profile {
-    'first'?: string,
-    'lastname'?: string,
-    'age'?: string,
-    'currency'?: Currency,
-    'country'?: Country,
-    'city'?: string,
-    'username'?: string,
-    'avatar'?: string
+    first?: string,
+    lastname?: string,
+    age?: string,
+    currency?: Currency,
+    country?: Country,
+    city?: string,
+    username?: string,
+    avatar?: string,
+    id?: string
 }
 
 export enum ValidateProfileError {
@@ -20,6 +21,7 @@ export enum ValidateProfileError {
     SERVER_ERROR = 'SERVER_ERROR'
 }
 export interface ProfileSchema {
+    id?: string,
     data?: Profile,
     form?: Profile,
     isLoading?: boolean;

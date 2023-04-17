@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const UseInitialEffect = (callback: () => {}) => {
+const UseInitialEffect = (callback: () => void) => {
     useEffect(() => {
         if (__PROJECT !== 'storybook') {
             callback();

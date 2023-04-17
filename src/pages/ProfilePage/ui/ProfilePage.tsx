@@ -13,6 +13,8 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { Currency } from 'entities/Currency/model/types/currency';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { ValidateProfileError } from 'entities/Profile/model/types/profile';
+import UseInitialEffect from 'shared/lib/hooks/useInitialEffect';
+import { useParams } from 'react-router-dom';
 import cls from './ProfilePage.module.scss';
 import ProfilePageHeader from './ProfilePageHeader/ProfilePageHeader';
 
@@ -28,6 +30,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     const { t } = useTranslation('profile');
     const dispatch = useAppDispatch();
     const profile = useSelector(getProfileState);
+    const { id } = useParams<{id: string}>();
 
     const validateErrorsTranslate = {
         [ValidateProfileError.INCORRRECT_AGE]: t('некорректный возраст'),
@@ -68,11 +71,11 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
         dispatch(profileActions.updateProfile({ country: value }));
     }, [dispatch]);
 
-    useEffect(() => {
-        if (__PROJECT !== 'storybook') {
-            dispatch(fetchProfileData());
+    UseInitialEffect(() => {
+        if (id) {
+            dispatch(fetchProfileData(id));
         }
-    }, [dispatch]);
+    });
 
     return (
         <DynamicModalLoader reducers={reducers} removeAfterUnmount>
