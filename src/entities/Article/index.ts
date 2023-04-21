@@ -1,7 +1,9 @@
 import ArticleDetails from './ui/ArticleDetails/ArticleDetails';
+import ArticleList from './ui/ArticleList/ArticleList';
+import ArticleViewSelector from './ui/ArticleViewSelector/ArticleViewSelector';
 
-export { ArticleDetails };
+export { ArticleDetails, ArticleList, ArticleViewSelector };
 
-export type { Article } from './model/types/article';
+export { Article, ArticleView } from './model/types/article';
 
 export { ArticleDetailsSchema } from './model/types/articleDetailsSchema';

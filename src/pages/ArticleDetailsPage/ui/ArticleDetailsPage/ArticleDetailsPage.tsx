@@ -15,12 +15,15 @@ import { articleDetailsCommentsReducer, getArticleComments }
     from 'pages/ArticleDetailsPage/model/slices/articleDetailsCommentSlice';
 import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import classNames from 'shared/lib/classNames/classNames';
 import DynamicModalLoader,
 { ReducersList } from 'shared/lib/components/DynamicModalLoader/DynamicModalLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import UseInitialEffect from 'shared/lib/hooks/useInitialEffect';
+import Button, { ThemeButton } from 'shared/ui/Button/Button';
+import Pages from 'shared/ui/Pages/Pages';
 import { Text } from 'shared/ui/Text/Text';
 import cls from './ArticleDetailsPage.module.scss';
 
@@ -34,10 +37,15 @@ const reducers: ReducersList = {
 
 const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const { id } = useParams<{id: string}>();
     const comments = useSelector(getArticleComments.selectAll);
     const error = useSelector(getArticleCommentsError);
     const isLoading = useSelector(getArticleCommentsIsLoading);
+
+    const onBackToList = useCallback(() => {
+        navigate(RoutePath.articles);
+    }, [navigate]);
 
     UseInitialEffect(() => dispatch(fetchCommentsByArticleId(id)));
 
@@ -56,12 +64,21 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
 
     return (
         <DynamicModalLoader reducers={reducers} removeAfterUnmount>
-            <div className={classNames(cls.ArticleDetailsPage, { }, [className])}>
+
+            <Pages className={classNames(cls.ArticleDetailsPage, { }, [className])}>
+                <Button
+                    theme={ThemeButton.OUTLINE}
+                    onClick={onBackToList}
+                >
+                    Назад к списку
+
+                </Button>
                 <ArticleDetails id={id} />
                 <Text title="Комментарии" className={cls.commentTitle} />
                 <AddCommentFormAsync onSendComment={onSendComment} />
                 <CommentList isLoading={isLoading} comments={comments} />
-            </div>
+            </Pages>
+
         </DynamicModalLoader>
     );
 };
