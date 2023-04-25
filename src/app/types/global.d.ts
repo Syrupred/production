@@ -19,3 +19,7 @@ declare module '*.svg' {
 
 declare const __IS__DEV: boolean;
 declare const __PROJECT: string;
+
+type OptionalRecord<K extends keyof any, T> = {
+  [P in K]?: T;
+};

@@ -8,4 +8,5 @@ view?: ArticleView;
 page: number;
 limit?: number;
 hasMore: boolean;
+_inited: boolean;
 }

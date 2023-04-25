@@ -6,7 +6,7 @@ import {
 import { fetchArticleById }
     from 'entities/Article/model/services/fetchArticleById/fetchArticleById';
 import { articleDetailsReducer } from 'entities/Article/model/slice/articleDetailsSlce';
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import classNames from 'shared/lib/classNames/classNames';
 import DynamicModalLoader,

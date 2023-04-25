@@ -5,7 +5,6 @@ import {
 import { StateSchema } from 'app/provider/StoreProvider';
 import { Article, ArticleView } from 'entities/Article';
 
-import { Comment } from 'entities/Comment';
 import { ARTICLES_VIEW_LOCALSTORAGE_KEY } from 'shared/const/localStorage';
 import { fetchArticlesPageList } from '../services/articlesPageList';
 import { articlePageSchema } from '../types/articlePageSchema';
@@ -28,6 +27,7 @@ const articlePageSlice = createSlice({
         entities: {},
         page: 1,
         hasMore: true,
+        _inited: false,
     }),
     reducers: {
         setView: (state, action: PayloadAction<ArticleView>) => {
@@ -38,6 +38,7 @@ const articlePageSlice = createSlice({
             const view = localStorage.getItem(ARTICLES_VIEW_LOCALSTORAGE_KEY) as ArticleView;
             state.view = view;
             state.limit = view === ArticleView.BIG ? 4 : 9;
+            state._inited = true;
         },
         setPage: (state, action: PayloadAction<number>) => {
             state.page = action.payload;

@@ -23,7 +23,7 @@ import DynamicModalLoader,
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import UseInitialEffect from 'shared/lib/hooks/useInitialEffect';
 import Button, { ThemeButton } from 'shared/ui/Button/Button';
-import Pages from 'shared/ui/Pages/Pages';
+import Pages from 'widgets/Pages/Pages';
 import { Text } from 'shared/ui/Text/Text';
 import cls from './ArticleDetailsPage.module.scss';
 

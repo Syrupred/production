@@ -6,7 +6,7 @@ import {
     getArticlePageError, getArticlePageIsLoading,
     getArticlePageView,
 } from 'pages/ArticlePage/model/selectors/articlesPageSelectors';
-import { fetchArticlesPageList } from 'pages/ArticlePage/model/services/articlesPageList';
+import { initArticlesPage } from 'pages/ArticlePage/model/services/initArticlesPage';
 import {
     articlePageActions,
     articlePageReducer, getArticles,
@@ -18,7 +18,7 @@ import DynamicModalLoader,
 { ReducersList } from 'shared/lib/components/DynamicModalLoader/DynamicModalLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import UseInitialEffect from 'shared/lib/hooks/useInitialEffect';
-import Pages from 'shared/ui/Pages/Pages';
+import Pages from 'widgets/Pages/Pages';
 import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage';
 import cls from './ArticlePage.module.scss';
 
@@ -42,8 +42,7 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
     }, [dispatch]);
 
     UseInitialEffect(() => {
-        dispatch(articlePageActions.initState());
-        dispatch(fetchArticlesPageList({ page: 1 }));
+        dispatch(initArticlesPage());
     });
 
     const onChangeView = useCallback((viewType: ArticleView) => {
@@ -51,7 +50,7 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
     }, [dispatch]);
     // eslint-disable-next-line i18next/no-literal-string
     return (
-        <DynamicModalLoader reducers={reducersList} removeAfterUnmount>
+        <DynamicModalLoader reducers={reducersList} removeAfterUnmount={false}>
 
             <Pages
                 className={classNames(cls.ArticlePage, { }, [className])}

@@ -15,7 +15,7 @@ import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { ValidateProfileError } from 'entities/Profile/model/types/profile';
 import UseInitialEffect from 'shared/lib/hooks/useInitialEffect';
 import { useParams } from 'react-router-dom';
-import Pages from 'shared/ui/Pages/Pages';
+import Pages from 'widgets/Pages/Pages';
 import cls from './ProfilePage.module.scss';
 import ProfilePageHeader from './ProfilePageHeader/ProfilePageHeader';
 

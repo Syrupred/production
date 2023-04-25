@@ -33,6 +33,7 @@ const ArticleViewSelector = ({ className, view, onClickView }: ArticleViewProps)
                 <Button
                     theme={ThemeButton.CLEAR}
                     onClick={onClick(item.view)}
+                    key={item.view}
                 >
                     <Icon
                         Svg={item.icon}
